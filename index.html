@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MINTCALC - The All-in-One Calculator</title>
+    <link rel="manifest" href="/manifest.json" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/mathjs@12.4.2/lib/browser/math.js"></script>
+    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
+    <script src="https://unpkg.com/jspdf-autotable@latest/dist/jspdf.plugin.autotable.js"></script>
+    <style>
+      :root, .theme-light {
+        --bg-color: #e0e5ec;
+        --text-color: #374151;
+        --primary-color: #4f46e5;
+        --shadow-light: #ffffff;
+        --shadow-dark: #a3b1c6;
+        --inset-shadow-light: #a3b1c6;
+        --inset-shadow-dark: #ffffff;
+      }
+      .theme-dark {
+        --bg-color: #2c303a;
+        --text-color: #e5e7eb;
+        --primary-color: #818cf8;
+        --shadow-light: #3a3f4c;
+        --shadow-dark: #1e2128;
+        --inset-shadow-light: #1e2128;
+        --inset-shadow-dark: #3a3f4c;
+      }
+      .theme-lime {
+        --bg-color: #f0fff4;
+        --text-color: #2e7d32;
+        --primary-color: #4caf50;
+        --shadow-light: #ffffff;
+        --shadow-dark: #d0e6d1;
+        --inset-shadow-light: #d0e6d1;
+        --inset-shadow-dark: #ffffff;
+      }
+      .theme-rose {
+        --bg-color: #fff1f2;
+        --text-color: #881337;
+        --primary-color: #f472b6;
+        --shadow-light: #ffffff;
+        --shadow-dark: #ffe4e6;
+        --inset-shadow-light: #ffe4e6;
+        --inset-shadow-dark: #ffffff;
+      }
+      .theme-yellow {
+        --bg-color: #fefce8; /* yellow-50 */
+        --text-color: #713f12; /* amber-900 */
+        --primary-color: #f59e0b; /* amber-500 */
+        --shadow-light: #ffffff;
+        --shadow-dark: #fde68a; /* yellow-300 */
+        --inset-shadow-light: #fde68a;
+        --inset-shadow-dark: #ffffff;
+      }
+      .theme-coffee {
+        --bg-color: #3e2723; /* brown-900 */
+        --text-color: #d7ccc8; /* brown-100 */
+        --primary-color: #a1887f; /* brown-300 */
+        --shadow-light: #4e342e; /* brown-800 */
+        --shadow-dark: #2d1b18;
+        --inset-shadow-light: #2d1b18;
+        --inset-shadow-dark: #4e342e;
+      }
+      .theme-lavender {
+        --bg-color: #f5f3ff; /* violet-50 */
+        --text-color: #4c1d95; /* violet-900 */
+        --primary-color: #8b5cf6; /* violet-500 */
+        --shadow-light: #ffffff;
+        --shadow-dark: #ddd6fe; /* violet-200 */
+        --inset-shadow-light: #ddd6fe;
+        --inset-shadow-dark: #ffffff;
+      }
+      .theme-sky {
+        --bg-color: #f0f9ff; /* sky-50 */
+        --text-color: #0c4a6e; /* sky-900 */
+        --primary-color: #38bdf8; /* sky-400 */
+        --shadow-light: #ffffff;
+        --shadow-dark: #e0f2fe; /* sky-100 */
+        --inset-shadow-light: #e0f2fe;
+        --inset-shadow-dark: #ffffff;
+      }
+      .theme-red {
+        --bg-color: #fee2e2; /* red-100 */
+        --text-color: #7f1d1d; /* red-900 */
+        --primary-color: #ef4444; /* red-500 */
+        --shadow-light: #fef2f2; /* red-50 */
+        --shadow-dark: #fca5a5; /* red-300 */
+        --inset-shadow-light: #fca5a5;
+        --inset-shadow-dark: #fef2f2;
+      }
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+      .neumorphic-button {
+        box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+        transition: all 0.1s ease-in-out;
+      }
+      .neumorphic-button:active {
+        box-shadow: inset 6px 6px 12px var(--inset-shadow-light), inset -6px -6px 12px var(--inset-shadow-dark);
+      }
+       .neumorphic-inset {
+        box-shadow: inset 6px 6px 12px var(--inset-shadow-light), inset -6px -6px 12px var(--inset-shadow-dark);
+      }
+       .neumorphic-flat {
+        box-shadow: 3px 3px 6px var(--shadow-dark), -3px -3px 6px var(--shadow-light);
+      }
+      .neumorphic-flat:active {
+        box-shadow: inset 3px 3px 6px var(--inset-shadow-light), inset -3px -3px 6px var(--inset-shadow-dark);
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.1.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+    "react/": "https://aistudiocdn.com/react@^19.1.1/"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').then(registration => {
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+          }, err => {
+            console.log('ServiceWorker registration failed: ', err);
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

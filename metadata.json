@@ -1,0 +1,7 @@
+{
+  "name": "MINTCALC - The All-in-One Calculator",
+  "description": "A comprehensive, all-in-one calculator application featuring basic and scientific calculations, an extensive unit converter, health and fitness tools, and financial calculators, all wrapped in a modern, neumorphic, and themeable interface.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}

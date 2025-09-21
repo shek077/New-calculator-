@@ -1,0 +1,11 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="90" fill="#4CAF50"/>
+  <rect x="80" y="80" width="352" height="150" rx="30" fill="#F0FFF4"/>
+  <text x="125" y="165" font-family="Arial, sans-serif" font-size="60" font-weight="bold" fill="#2E7D32">MINT</text>
+  <circle cx="132" cy="300" r="32" fill="#E8F5E9"/>
+  <circle cx="256" cy="300" r="32" fill="#E8F5E9"/>
+  <circle cx="380" cy="300" r="32" fill="#E8F5E9"/>
+  <circle cx="132" cy="400" r="32" fill="#E8F5E9"/>
+  <circle cx="256" cy="400" r="32" fill="#E8F5E9"/>
+  <circle cx="380" cy="400" r="32" fill="#E8F5E9"/>
+</svg>
