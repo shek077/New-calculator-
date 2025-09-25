@@ -1,7 +1,7 @@
 {
   "name": "MINTCALC - The All-in-One Calculator",
   "short_name": "MINTCALC",
-  "description": "A comprehensive, all-in-one calculator application featuring basic and scientific calculations, an extensive unit converter, health and fitness tools, and financial calculators, all wrapped in a modern, neumorphic, and themeable interface.",
+  "description": "A comprehensive, all-in-one calculator featuring basic & scientific calculations, unit converters, health tools, and financial calculators, with a modern neumorphic theme.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f0fff4",
@@ -9,9 +9,15 @@
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "data:image/svg+xml,<svg width='512' height='512' viewBox='0 0 512 512' fill='none' xmlns='http://www.w3.org/2000/svg'><rect width='512' height='512' rx='90' fill='%234CAF50'/><rect x='80' y='80' width='352' height='150' rx='30' fill='%23F0FFF4'/><text x='125' y='165' font-family='Arial, sans-serif' font-size='60' font-weight='bold' fill='%232E7D32'>MINT</text><circle cx='132' cy='300' r='32' fill='%23E8F5E9'/><circle cx='256' cy='300' r='32' fill='%23E8F5E9'/><circle cx='380' cy='300' r='32' fill='%23E8F5E9'/><circle cx='132' cy='400' r='32' fill='%23E8F5E9'/><circle cx='256' cy='400' r='32' fill='%23E8F5E9'/><circle cx='380' cy='400' r='32' fill='%23E8F5E9'/></svg>",
-      "type": "image/svg+xml",
-      "sizes": "192x192 512x512",
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
       "purpose": "any maskable"
     }
   ]
