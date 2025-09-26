@@ -1,55 +1,62 @@
-const CACHE_NAME = 'mintcalc-v2'; // Version bumped to ensure update
+const CACHE_NAME = 'mintcalc-v3'; 
 const urlsToCache = [
   '/',
   '/index.html',
-  '/index.tsx',
-  '/manifest.json'
-  // Icon paths removed as they are now embedded in the manifest
+  '/manifest.json',
+  '/icons/icon-192.png',
+  '/icons/icon-512.png'
 ];
 
-// Install the service worker and cache assets
+// Install & pre-cache core assets
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => {
-        console.log('Opened cache');
-        return cache.addAll(urlsToCache);
-      })
+    caches.open(CACHE_NAME).then(cache => {
+      console.log('Opened cache');
+      return cache.addAll(urlsToCache);
+    })
   );
-  self.skipWaiting(); // Force the waiting service worker to become the active service worker.
+  self.skipWaiting();
 });
 
-// Clean up old caches on activation
+// Activate & cleanup old caches
 self.addEventListener('activate', event => {
-  const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
+    caches.keys().then(cacheNames =>
+      Promise.all(
         cacheNames.map(cacheName => {
-          if (cacheWhitelist.indexOf(cacheName) === -1) {
-            // If this cache name is not in our whitelist, delete it.
+          if (cacheName !== CACHE_NAME) {
             console.log('Deleting old cache:', cacheName);
             return caches.delete(cacheName);
           }
         })
-      );
-    })
+      )
+    )
   );
+  self.clients.claim();
 });
 
-
-// Serve cached content when offline
+// Fetch handler: Cache-first with network fallback
 self.addEventListener('fetch', event => {
   event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        // Cache hit - return response
-        if (response) {
-          return response;
+    caches.match(event.request).then(response => {
+      if (response) return response;
+
+      // If not cached, fetch from network & cache it dynamically
+      return fetch(event.request).then(networkResponse => {
+        if (!networkResponse || networkResponse.status !== 200) {
+          return networkResponse;
         }
-        // Not in cache - fetch from network
-        return fetch(event.request);
-      }
-    )
+        const clonedResponse = networkResponse.clone();
+        caches.open(CACHE_NAME).then(cache => {
+          cache.put(event.request, clonedResponse);
+        });
+        return networkResponse;
+      }).catch(() => {
+        // Optional: fallback page for offline
+        if (event.request.mode === 'navigate') {
+          return caches.match('/index.html');
+        }
+      });
+    })
   );
 });
