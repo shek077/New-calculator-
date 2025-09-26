@@ -1,22 +1,22 @@
 {
   "name": "MINTCALC - The All-in-One Calculator",
   "short_name": "MINTCALC",
-  "description": "A comprehensive, all-in-one calculator featuring basic & scientific calculations, unit converters, health tools, and financial calculators, with a modern neumorphic theme.",
-  "start_url": "/New-calculator-/",
-  "scope": "/New-calculator-/",
+  "description": "An all-in-one calculator with scientific functions, unit converters, health and fitness tools, and financial calculators — all in a sleek neumorphic theme.",
+  "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#f0fff4",
   "theme_color": "#2e7d32",
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/New-calculator-/icons/icon-192.png",
+      "src": "icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/New-calculator-/icons/icon-512.png",
+      "src": "icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
